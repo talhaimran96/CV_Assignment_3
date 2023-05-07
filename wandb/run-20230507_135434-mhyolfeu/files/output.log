@@ -1,0 +1,27 @@
+  0%|          | 0/19 [00:00<?, ?it/s]C:\Users\Muhammad Talha Imran\anaconda3\envs\py_3\lib\site-packages\torchvision\transforms\functional.py:1603: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  warnings.warn(
+  0%|          | 0/19 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "C:\Users\Muhammad Talha Imran\PycharmProjects\CV_Assignment_3\U_net.py", line 93, in <module>
+    train_loss, train_accuracy, train_classification_loss, train_dice_loss, train_dice_score, train_iou = run_epoch(
+  File "C:\Users\Muhammad Talha Imran\PycharmProjects\CV_Assignment_3\HelperFunctions.py", line 83, in run_epoch
+    predicted_masks = model(images)
+  File "C:\Users\Muhammad Talha Imran\anaconda3\envs\py_3\lib\site-packages\torch\nn\modules\module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\Muhammad Talha Imran\anaconda3\envs\py_3\lib\site-packages\segmentation_models_pytorch\base\model.py", line 29, in forward
+    features = self.encoder(x)
+  File "C:\Users\Muhammad Talha Imran\anaconda3\envs\py_3\lib\site-packages\torch\nn\modules\module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\Muhammad Talha Imran\anaconda3\envs\py_3\lib\site-packages\segmentation_models_pytorch\encoders\vgg.py", line 70, in forward
+    x = stages[i](x)
+  File "C:\Users\Muhammad Talha Imran\anaconda3\envs\py_3\lib\site-packages\torch\nn\modules\module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\Muhammad Talha Imran\anaconda3\envs\py_3\lib\site-packages\torch\nn\modules\container.py", line 217, in forward
+    input = module(input)
+  File "C:\Users\Muhammad Talha Imran\anaconda3\envs\py_3\lib\site-packages\torch\nn\modules\module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\Muhammad Talha Imran\anaconda3\envs\py_3\lib\site-packages\torch\nn\modules\conv.py", line 463, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+  File "C:\Users\Muhammad Talha Imran\anaconda3\envs\py_3\lib\site-packages\torch\nn\modules\conv.py", line 459, in _conv_forward
+    return F.conv2d(input, weight, bias, self.stride,
+RuntimeError: Input type (torch.cuda.FloatTensor) and weight type (torch.FloatTensor) should be the same

@@ -1,0 +1,1 @@
+{"Classification loss(batch_wise)": 4334.466796875, "Dice loss(batch_wise)": 0.8993388556821894, "combined loss": 8668.93359375, "_timestamp": 1683455259.59284, "_runtime": 16.240700006484985, "_step": 0, "_wandb": {"runtime": 14}}

@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "C:\Users\Muhammad Talha Imran\PycharmProjects\CV_Assignment_3\U_net.py", line 92, in <module>
+    for epoch in epochs:
+TypeError: 'int' object is not iterable

@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "C:\Users\Muhammad Talha Imran\PycharmProjects\CV_Assignment_3\U_net.py", line 95, in <module>
+    train_loss, train_accuracy, train_classification_loss, train_dice_loss, train_dice_score, train_iou = run_epoch(
+  File "C:\Users\Muhammad Talha Imran\PycharmProjects\CV_Assignment_3\HelperFunctions.py", line 79, in run_epoch
+    compute_dice_loss = DiceLoss()
+TypeError: __init__() missing 1 required positional argument: 'mode'
+Epoch: 0

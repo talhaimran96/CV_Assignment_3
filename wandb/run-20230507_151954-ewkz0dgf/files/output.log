@@ -1,0 +1,208 @@
+
+Epoch: 0
+  0%|          | 0/19 [00:00<?, ?it/s]C:\Users\Muhammad Talha Imran\anaconda3\envs\py_3\lib\site-packages\torchvision\transforms\functional.py:1603: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  warnings.warn(
+ 26%|██▋       | 5/19 [00:03<00:07,  1.91it/s]
+tensor(5053.0112, device='cuda:0') 0.8984249783605363
+tensor(4912.8213, device='cuda:0') 0.8869231000042566
+tensor(4792.7065, device='cuda:0') 0.8977690485244195
+tensor(5335.0259, device='cuda:0') 0.8943316966078106
+tensor(4985.0483, device='cuda:0') 0.8850752299683867
+tensor(4968.2261, device='cuda:0') 0.9014049232517929
+tensor(4792.3125, device='cuda:0') 0.9044074127477839
+tensor(5077.7764, device='cuda:0') 0.9065089973588564
+tensor(4650.9673, device='cuda:0') 0.9045391678512429
+tensor(4754.9219, device='cuda:0') 0.8802827795309697
+
+ 58%|█████▊    | 11/19 [00:05<00:03,  2.66it/s]
+tensor(4726.3110, device='cuda:0') 0.8940011777339014
+tensor(4803.8384, device='cuda:0') 0.9090961257065254
+tensor(4748.9126, device='cuda:0') 0.9226936368467766
+tensor(5337.0459, device='cuda:0') 0.899546922084255
+tensor(4740.2031, device='cuda:0') 0.8752703860296844
+
+100%|██████████| 19/19 [00:08<00:00,  2.26it/s]
+C:\Users\Muhammad Talha Imran\anaconda3\envs\py_3\lib\site-packages\torch\optim\lr_scheduler.py:139: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn("Detected call of `lr_scheduler.step()` before `optimizer.step()`. "
+ 26%|██▋       | 5/19 [00:01<00:04,  3.43it/s]
+tensor(5109.7065, device='cuda:0') 0.8989354363386516
+tensor(4687.8877, device='cuda:0') 0.9113517640002181
+Epoch: 1
+tensor(4963.2852, device='cuda:0') 0.9023330140500682
+tensor(5065.0684, device='cuda:0') 0.9012669068348808
+tensor(4729.6357, device='cuda:0') 0.9242045760430686
+tensor(4838.3784, device='cuda:0') 0.9084664689562805
+
+ 63%|██████▎   | 12/19 [00:03<00:01,  3.55it/s]
+tensor(4603.5127, device='cuda:0') 0.8924811956994144
+tensor(5188.3271, device='cuda:0') 0.9096013613549659
+tensor(4843.7783, device='cuda:0') 0.8856345905134748
+tensor(5338.8462, device='cuda:0') 0.8772563100569781
+tensor(4601.0854, device='cuda:0') 0.9099602692595772
+tensor(5332.8809, device='cuda:0') 0.8923562356367513
+100%|██████████| 19/19 [00:05<00:00,  3.40it/s]
+  0%|          | 0/19 [00:00<?, ?it/s]
+tensor(5035.7412, device='cuda:0') 0.8901489184153695
+tensor(4671.3291, device='cuda:0') 0.8832329790096879
+tensor(5048.6729, device='cuda:0') 0.9064406598547706
+tensor(4843.3252, device='cuda:0') 0.8978756160188391
+tensor(5050.0728, device='cuda:0') 0.8842235063338179
+tensor(5251.2158, device='cuda:0') 0.8911739253036182
+tensor(5440.2280, device='cuda:0') 0.8905744408491271
+Epoch: 2
+tensor(4633.2632, device='cuda:0') 0.8983537676462199
+tensor(4882.3145, device='cuda:0') 0.8968236076746795
+tensor(4419.5112, device='cuda:0') 0.874466980882275
+tensor(5472.8071, device='cuda:0') 0.8953855524255785
+tensor(4383.1221, device='cuda:0') 0.9152341998342188
+
+
+ 63%|██████▎   | 12/19 [00:03<00:02,  3.05it/s]
+tensor(5104.6084, device='cuda:0') 0.9097849005114526
+tensor(4953.7827, device='cuda:0') 0.904691628399374
+tensor(4865.0962, device='cuda:0') 0.9100801590346509
+tensor(5251.5581, device='cuda:0') 0.9071088951335847
+tensor(4984.5649, device='cuda:0') 0.8918719239187193
+tensor(4842.6899, device='cuda:0') 0.9039876006655848
+tensor(5229.8862, device='cuda:0') 0.8918166558352418
+tensor(4979.8237, device='cuda:0') 0.8810539313350748
+tensor(4749.2471, device='cuda:0') 0.8712833804542323
+tensor(4998.9468, device='cuda:0') 0.9166823085685322
+tensor(5029.1304, device='cuda:0') 0.8856574342831303
+tensor(4927.2070, device='cuda:0') 0.8956453912675484
+tensor(4724.3086, device='cuda:0') 0.9142194610491877
+100%|██████████| 19/19 [00:06<00:00,  3.13it/s]
+
+ 37%|███▋      | 7/19 [00:01<00:03,  3.67it/s]
+tensor(5181.4766, device='cuda:0') 0.9003497551300749
+tensor(5188.7617, device='cuda:0') 0.8995928535907582
+tensor(5249.8789, device='cuda:0') 0.8873246998465328
+tensor(5311.2881, device='cuda:0') 0.8909911312086404
+tensor(4753.7734, device='cuda:0') 0.9079923991967053
+tensor(4834.1055, device='cuda:0') 0.8808748627065364
+
+ 68%|██████▊   | 13/19 [00:03<00:01,  3.11it/s]
+tensor(4624.4111, device='cuda:0') 0.896816176368892
+tensor(5092.3174, device='cuda:0') 0.8949343417553192
+tensor(4628.5586, device='cuda:0') 0.8854022572113132
+tensor(4833.0156, device='cuda:0') 0.9085655362774406
+tensor(5126.3682, device='cuda:0') 0.8847051020308212
+tensor(5009.4053, device='cuda:0') 0.9111257702283324
+tensor(5003.4004, device='cuda:0') 0.896092885594158
+tensor(4700.8730, device='cuda:0') 0.8880738674162078
+tensor(4711.5962, device='cuda:0') 0.8863838254503977
+tensor(4369.7002, device='cuda:0') 0.9074469750787485
+tensor(4679.5601, device='cuda:0') 0.9030810092048887
+tensor(5038.4351, device='cuda:0') 0.897806017401315
+Epoch: 4
+tensor(5216.0547, device='cuda:0') 0.894355188823837
+100%|██████████| 19/19 [00:05<00:00,  3.36it/s]
+
+ 42%|████▏     | 8/19 [00:02<00:03,  3.31it/s]
+tensor(4945.1343, device='cuda:0') 0.8832621428861621
+tensor(4866.5640, device='cuda:0') 0.8948134390419693
+tensor(5208.0635, device='cuda:0') 0.9107565221424109
+tensor(4718.6260, device='cuda:0') 0.8721736325488876
+tensor(5268.1284, device='cuda:0') 0.9075703411981874
+
+ 74%|███████▎  | 14/19 [00:04<00:01,  3.14it/s]
+tensor(5230.7832, device='cuda:0') 0.8995773150572284
+tensor(5325.9805, device='cuda:0') 0.9112448799320622
+tensor(4950.7290, device='cuda:0') 0.8969915286744383
+tensor(4406.1064, device='cuda:0') 0.9047273076540465
+tensor(4951.1089, device='cuda:0') 0.8923158955901589
+tensor(4895.5439, device='cuda:0') 0.9020543273171349
+tensor(4793.8555, device='cuda:0') 0.8971625078957444
+tensor(5032.6792, device='cuda:0') 0.9072177235409272
+tensor(4679.5854, device='cuda:0') 0.8738835278117852
+tensor(4822.2949, device='cuda:0') 0.8978712837138718
+tensor(4235.7056, device='cuda:0') 0.9252546547773989
+Epoch: 5
+tensor(4710.3369, device='cuda:0') 0.9146161811910709
+tensor(4933.9248, device='cuda:0') 0.8952611979821098
+100%|██████████| 19/19 [00:05<00:00,  3.29it/s]
+ 16%|█▌        | 3/19 [00:00<00:04,  3.43it/s]
+tensor(4822.7041, device='cuda:0') 0.8928831592662124
+tensor(5326.1016, device='cuda:0') 0.9103110047030978
+tensor(4753.5283, device='cuda:0') 0.8941795052454633
+tensor(4882.4868, device='cuda:0') 0.888631986196939
+tensor(4651.4756, device='cuda:0') 0.8939959510801742
+
+
+ 84%|████████▍ | 16/19 [00:04<00:00,  3.30it/s]
+tensor(4861.6885, device='cuda:0') 0.8962920555717467
+tensor(5209.5337, device='cuda:0') 0.8737360316836609
+tensor(4998.5415, device='cuda:0') 0.8929629722201393
+tensor(4847.4321, device='cuda:0') 0.9010183344271688
+tensor(5229.6484, device='cuda:0') 0.8845732585979201
+tensor(4932.3696, device='cuda:0') 0.913482988549239
+100%|██████████| 19/19 [00:05<00:00,  3.33it/s]
+ 21%|██        | 4/19 [00:01<00:04,  3.20it/s]
+tensor(4994.5610, device='cuda:0') 0.8961882049593728
+tensor(4955.9019, device='cuda:0') 0.8981356181332995
+tensor(5189.8286, device='cuda:0') 0.9167314397870521
+Epoch: 6
+tensor(4959.3774, device='cuda:0') 0.9106722474619618
+tensor(4799.4155, device='cuda:0') 0.9028292599762419
+tensor(4882.5269, device='cuda:0') 0.9098557552750512
+
+ 47%|████▋     | 9/19 [00:02<00:02,  3.39it/s]
+tensor(5261.3730, device='cuda:0') 0.8917138431402513
+tensor(4849.8628, device='cuda:0') 0.8987342208851828
+tensor(5521.7104, device='cuda:0') 0.8928136909589893
+tensor(4582.7842, device='cuda:0') 0.8997573870245099
+tensor(4993.5249, device='cuda:0') 0.8879671347950318
+tensor(4982.8628, device='cuda:0') 0.8997878151579116
+
+ 79%|███████▉  | 15/19 [00:04<00:01,  3.09it/s]
+tensor(4849.1318, device='cuda:0') 0.9146155204978734
+tensor(5003.6797, device='cuda:0') 0.8955956152789472
+tensor(4677.0205, device='cuda:0') 0.8967822180923402
+100%|██████████| 19/19 [00:05<00:00,  3.32it/s]
+ 21%|██        | 4/19 [00:01<00:04,  3.15it/s]
+tensor(4601.2905, device='cuda:0') 0.8731130664513168
+tensor(4920.0684, device='cuda:0') 0.8809495244169134
+tensor(4719.3086, device='cuda:0') 0.8942497962984519
+tensor(4801.3242, device='cuda:0') 0.8875716667298993
+Epoch: 7
+tensor(4828.4209, device='cuda:0') 0.8859047652307531
+tensor(4911.0771, device='cuda:0') 0.8950746233531434
+tensor(5443.7378, device='cuda:0') 0.8934287428763688
+
+ 53%|█████▎    | 10/19 [00:03<00:02,  3.35it/s]
+tensor(5036.2881, device='cuda:0') 0.8964834727090151
+tensor(5178.5693, device='cuda:0') 0.9161991844133536
+tensor(4761.0850, device='cuda:0') 0.9002634887285377
+tensor(5134.1577, device='cuda:0') 0.8812400465354054
+tensor(4723.1675, device='cuda:0') 0.8798016547046219
+
+ 84%|████████▍ | 16/19 [00:05<00:01,  2.75it/s]
+tensor(5302.7085, device='cuda:0') 0.9014259596799507
+tensor(4811.1313, device='cuda:0') 0.8893557686478396
+tensor(4861.4468, device='cuda:0') 0.9141485922981725
+tensor(4880.8843, device='cuda:0') 0.8876773984719873
+tensor(5440.7056, device='cuda:0') 0.8908619799530484
+100%|██████████| 19/19 [00:06<00:00,  3.12it/s]
+ 16%|█▌        | 3/19 [00:01<00:05,  3.06it/s]
+tensor(4880.0249, device='cuda:0') 0.8901822439393392
+tensor(4663.6606, device='cuda:0') 0.9008831472155318
+tensor(4731.2891, device='cuda:0') 0.8884787202739213
+Epoch: 8
+tensor(5099.6323, device='cuda:0') 0.9204501526009748
+tensor(4621.3477, device='cuda:0') 0.8980576252802333
+
+ 53%|█████▎    | 10/19 [00:03<00:02,  3.08it/s]
+tensor(4970.5098, device='cuda:0') 0.9033015239916055
+tensor(5012.6230, device='cuda:0') 0.8827816806173914
+tensor(4756.8501, device='cuda:0') 0.8833134616555967
+tensor(5354.6172, device='cuda:0') 0.8821803769717625
+tensor(4799.7129, device='cuda:0') 0.9059505535040184
+tensor(5155.1006, device='cuda:0') 0.8903955824480948
+
+ 79%|███████▉  | 15/19 [00:04<00:01,  2.48it/s]
+tensor(5016.1992, device='cuda:0') 0.8812269455162206
+tensor(4798.7241, device='cuda:0') 0.8795867564256735
+tensor(5140.3984, device='cuda:0') 0.901124126197917
+tensor(4872.5625, device='cuda:0') 0.9023314083508707
+
+ 84%|████████▍ | 16/19 [00:05<00:01,  2.13it/s]
