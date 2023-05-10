@@ -23,7 +23,7 @@ run_test_set = True  # True to run test set post training
 generate_video_frames = False  # generates video frames
 generate_video = False
 
-backbone = 'efficientnet-b4'#'vgg16_bn'#'resnet18'
+backbone = 'resnext50_32x4d'  # 'efficientnet-b4'  # 'resnet101'  # 'efficientnet-b4'  # 'vgg16_bn'#'resnet18'
 model_name = os.path.basename(__file__).split(".")[
     0]  # Name of the .py file running to standardize the names of the saved files and ease of later use
 batch_size = 8
@@ -67,8 +67,9 @@ validation_loader = DataLoader(validation_set, batch_size=batch_size, shuffle=Tr
 test_loader = DataLoader(test_set, batch_size=batch_size,
                          shuffle=True)
 
-model = segmentation_models.Unet(encoder_name=backbone, encoder_weights='imagenet', in_channels=3, classes=12,
-                                 activation=None, encoder_depth=5, decoder_channels=[256, 128, 64, 32, 16])
+model = segmentation_models.DeepLabV3Plus(encoder_name=backbone, encoder_weights='imagenet', in_channels=3, classes=12,
+                                          activation=None, encoder_depth=5,
+                                          decoder_atrous_rates=(12, 24, 36))
 
 classification_loss_function = torch.nn.CrossEntropyLoss()
 dice_loss_function = DiceLoss(mode="multiclass")
@@ -112,7 +113,7 @@ if run_training:
         # track hyperparameters and run metadata
         config={
             "learning_rate": learning_rate,
-            "architecture": f"U_Net_{backbone}",
+            "architecture": f"{model_name}_{backbone}",
             "dataset": "Streets",
             "epochs": epochs,
             "Batch_size": batch_size,

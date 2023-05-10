@@ -1,2 +1,2 @@
 ,Model/Backbone,Start Learning_rate,End Learning_rate,Batch_size,Training_set_size,Epochs,Test_set_size,Validation_set_size,Tranfer_learning,max_validation_dice,Classification_loss,Execution_time,Per Epoch Time
-0,U_net,0.001,1e-05,8,293,100,101,74,False,"tensor(0.7613, device='cuda:0')",0.31855997294187544,1827.952942609787,18.27952942609787
+0,DeepLab_V3Plus,0.001,1e-05,8,293,100,101,74,False,"tensor(0.7461, device='cuda:0')",0.2702772691845894,1183.4663000106812,11.834663000106811
