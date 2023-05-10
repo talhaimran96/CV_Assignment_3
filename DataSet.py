@@ -11,7 +11,7 @@ import albumentations as Augmentations
 from os import listdir
 
 
-class Dataset(Dataset):
+class DataSet(Dataset):
     """
     Custom dataset class, to provide interface between torch dataloader and our dataset
     """
@@ -59,10 +59,9 @@ class Dataset(Dataset):
             image = Image.fromarray(image)
 
         t = Tranformations.Compose([Tranformations.ToTensor(), Tranformations.Normalize(self.mean, self.std),
-                                    Tranformations.Resize(size=(224, 224))])
+                                    Tranformations.Resize(size=(256, 256))])
         image = t(image)
-        mask = torch.from_numpy(mask).float()
-
+        mask = torch.from_numpy(mask).long()
         return image, mask
 
     def return_file_list(self):

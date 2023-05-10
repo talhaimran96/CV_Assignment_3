@@ -1,1 +1,0 @@
-{"training loss": 622.1378173828125, "training_accuracy": 0.006442521981328794, "classification_loss": 311.0689276477176, "training_dice_loss": 0.008262109942734241, "training_dice_score": 0.05658430606126785, "Train MIoU": 0.0014373740083362372, "_timestamp": 1683450905.1925714, "_runtime": 128.9528374671936, "_step": 379}

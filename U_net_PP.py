@@ -2,7 +2,6 @@ from DataSet import DataSet
 import torch
 from torch.utils.data import DataLoader
 import numpy as np
-import re
 import os
 import time
 from HelperFunctions import run_epoch, display_for_comparison, predict_image_mask_miou, plot_metrics
@@ -16,17 +15,17 @@ from torchvision import transforms as transformations
 import cv2
 
 # These params can be updated to allow for better control of the program(i.e. the control knobs of this code)
-run_training = False  # False to run inferences, otherwise it'll start train the model
+run_training = True  # False to run inferences, otherwise it'll start train the model
 resume_training = False  # If training needs to be resumed from some epoch
 load_model = True  # If you want to load a model previously trained
 run_test_set = True  # True to run test set post training
 generate_video_frames = False  # generates video frames
-generate_video = True
+generate_video = False
 
-backbone = 'resnet18'  # 'mit_b5'  # 'efficientnet-b7'
+backbone = 'efficientnet-b7'  # 'efficientnet-b7'#'mit_b5'  # 'resnet18'
 model_name = os.path.basename(__file__).split(".")[
     0]  # Name of the .py file running to standardize the names of the saved files and ease of later use
-batch_size = 8
+batch_size = 4
 learning_rate = 0.001
 pretrained = False  # This option is not valid for Custom model, no pretrained weights exist
 epochs = 100
@@ -67,8 +66,8 @@ validation_loader = DataLoader(validation_set, batch_size=batch_size, shuffle=Tr
 test_loader = DataLoader(test_set, batch_size=batch_size,
                          shuffle=True)
 
-model = segmentation_models.Unet(encoder_name=backbone, encoder_weights='imagenet', in_channels=3, classes=12,
-                                 activation=None, encoder_depth=5, decoder_channels=[256, 128, 64, 32, 16])
+model = segmentation_models.UnetPlusPlus(encoder_name=backbone, encoder_weights='imagenet', in_channels=3, classes=12,
+                                         activation=None, encoder_depth=5, decoder_channels=[256, 128, 64, 32, 16])
 
 classification_loss_function = torch.nn.CrossEntropyLoss()
 dice_loss_function = DiceLoss(mode="multiclass")
@@ -112,7 +111,7 @@ if run_training:
         # track hyperparameters and run metadata
         config={
             "learning_rate": learning_rate,
-            "architecture": f"U_Net_{backbone}",
+            "architecture": f"{model_name}_{backbone}",
             "dataset": "Streets",
             "epochs": epochs,
             "Batch_size": batch_size,
@@ -360,22 +359,20 @@ if run_test_set:
                 plt.imshow(pred_mask, alpha=0.3, cmap='viridis')
                 plt.suptitle(model_name + " " + backbone + "_results")
                 plt.tight_layout()
-                plt.savefig(f"./Results/Video_frames/resnet18/{index}.jpg")
+                plt.savefig(f"./Results/Video_frames/resnet18/{backbone}_{index}.jpg")
 
-        if generate_video:
-            image_folder = './Results/Video_frames/resnet18'
-            video_name = f'./Results/Videos/{backbone}_video.avi'
-            frames = os.listdir(image_folder)
-            frames.sort(key=lambda f: int(re.sub('\D', '', f)))
-            print(frames)
-            images = [img for img in frames if img.endswith(".jpg")]
-            frame = cv2.imread(os.path.join(image_folder, images[0]))
-            height, width, layers = frame.shape
+            if generate_video:
+                image_folder = './Results/Video_frames/resnet18'
+                video_name = f'./Results/Videos/{backbone}_video.avi'
 
-            video = cv2.VideoWriter(video_name, cv2.VideoWriter_fourcc(*'MJPG'), 5, (width, height))
+                images = [img for img in os.listdir(image_folder) if img.endswith(".jpg")]
+                frame = cv2.imread(os.path.join(image_folder, images[0]))
+                height, width, layers = frame.shape
 
-            for image in images:
-                video.write(cv2.imread(os.path.join(image_folder, image)))
+                video = cv2.VideoWriter(video_name, 0, 1, (width, height))
 
-            cv2.destroyAllWindows()
-            video.release()
+                for image in images:
+                    video.write(cv2.imread(os.path.join(image_folder, image)))
+
+                cv2.destroyAllWindows()
+                video.release()
