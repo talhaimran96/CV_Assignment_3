@@ -47,6 +47,7 @@ train_annotation_path = "../Dataset/annotations_prepped_train"
 mean = [0.485, 0.456, 0.406]
 std = [0.229, 0.224, 0.225]
 
+# setting up augmentations
 augmentations = Augmentations.Compose(
     [Augmentations.HorizontalFlip(always_apply=False, p=0.5), Augmentations.VerticalFlip(always_apply=False, p=0.2),
      Augmentations.RandomBrightness(always_apply=False, p=0.2),
@@ -57,7 +58,7 @@ augmentations = Augmentations.Compose(
 test_set = DataSet(test_images_path, test_annotation_path, mean, std, transform=augmentations)
 train_set = DataSet(train_images_path, train_annotation_path, mean, std, transform=augmentations)
 
-#
+# 80-20 split
 train_size = int(0.8 * len(train_set))
 validation_size = len(train_set) - train_size
 train_set, validation_set = torch.utils.data.random_split(train_set, [train_size, validation_size])
@@ -67,6 +68,7 @@ validation_loader = DataLoader(validation_set, batch_size=batch_size, shuffle=Tr
 test_loader = DataLoader(test_set, batch_size=batch_size,
                          shuffle=True)
 
+# model and backbone initialization
 model = segmentation_models.PAN(encoder_name=backbone, encoder_weights='imagenet', in_channels=3, classes=12,
                                 activation=None, decoder_channels=256)
 

@@ -35,7 +35,12 @@ unstructured data, just as humans are able to perceive the world around them and
 Segmentation of images is one stepping stone towards developing machines that can understand and perceive the
 environment and world around them.
 
+**Results from Unet++ using the resnet101 backbone**
+
+![U_net_PP_resnet101_video.gif](Results%2FVideos%2Fgif_files%2FU_net_PP_resnet101_video.gif)
+
 <a name="Introduction"/></a>
+
 ## Introduction
 
 Semantic segmentation is the process of labeling each pixel with respect to its category/class. This has many
@@ -91,6 +96,8 @@ list of the augmentations used and the rationale behind their use.
   be
   multiples of 16, and this is the closest downsample possible
 
+**Dataset available [here](https://drive.google.com/drive/folders/1CWvhf_CtSTP1k8fFgG54cMV0GPMtqccm?usp=share_link)**
+
 <a name="DataDistribution"></a>
 
 #### Data Distribution:
@@ -105,9 +112,57 @@ list of the augmentations used and the rationale behind their use.
 
 ## File Navigation:
 
+Directory System:
+
+![File_navigation.PNG](Accumulated_Data%2FFile_navigation.PNG)
+
+- **Accumulated_Data** >> Contains Visualizations used for readme.
+- **Dataset** >> Contains the dataset(Not uploaded,
+  dataset [link](https://drive.google.com/drive/folders/1CWvhf_CtSTP1k8fFgG54cMV0GPMtqccm?usp=share_link))
+- **Models** >> Contains the trained models(**Trained Models are
+  available [here](https://drive.google.com/drive/folders/1h0f-khok7UQCqT1ZDvyH-5Bc9p08joz6?usp=share_link)**. Linked
+  separately due to large file size.)
+- **Results** >> Contains the Results from training, validation and test.
+- **SCR** >> Contains the Results from training
+
+Dataset folder structure:
+
+![Dataset_folder.PNG](Accumulated_Data%2FDataset_folder.PNG)
+
+Results folder structure:
+
+![Results_folder.PNG](Accumulated_Data%2FResults_folder.PNG)
+
 <a name="Nomenclature"></a>
 
 ### Nomenclature:
+
+**SCR folder**
+
+- **Dataset.py** >> Contains the dataset class
+- **HelperFunctions.py** >> Contains the Helper functions for training
+- **test.py** >> Experimentation playground
+- **U_net.py** >> Contains the Unet model script
+- **U_net_PP.py** >> Contains the Unet++ model script
+- **DeepLab_V3Plus.py** >> Contains the DeepLab_V3Plus model script
+- **PANet.py** >> Contains the PANet model script
+
+**Results folder**
+
+- **Video_frames** >> Contains predict results on the dataset to generate video
+- **Videos** >> Contains videos and gif files for readme and as examples for the reader.
+- **{model_name}_{backbone}_experiment_data.csv** >> Contains training parameter for **{model_name}_{Backbone}**
+- **{model_name}_{backbone}_quantitative_results.csv** >> Contains quantitative results for **{model_name}_{Backbone}**
+- **{model_name}_{backbone}_Metrics.png** >> Contains training metrics for **{model_name}_{Backbone}**
+- **{model_name}_{backbone}_qualitative_results.jpg** >> Contains qualitative results for **{model_name}_{Backbone}**
+- **{model_name}_{backbone}_Training_Metrics.png** >> Contains training metrics for **{model_name}_{Backbone}**
+- **{model_name}_{backbone}_Validation_Metrics.png** >> Contains Validation metrics for **{model_name}_{Backbone}**
+
+**Models folder**
+
+- **{model_name}_{backbone}__best_dice.pth** >> **{model_name}_{Backbone}** with best dice score during training
+- **{model_name}_{backbone}__check_points.pth** >> **{model_name}_{Backbone}** as checkpoint during training even if
+  dice score does not increase
 
 <a name="Implementationdetails"></a>
 
@@ -117,15 +172,72 @@ list of the augmentations used and the rationale behind their use.
 
 ### Usage instructions:
 
+After downloading the models and dataset to their respective directory within the project directory.
+
+use the following controls:
+![Program_Controls.PNG](Accumulated_Data%2FProgram_Controls.PNG)
+
+- **Run_training** >> **Boolean**, to execute training on the provided dataset, must be true even if resuming training,
+  if you
+  wish to get inference from trained model then set to False and the program will skip training
+- **Resume_training** >> **Boolean**, to resume interrupted training set to True, else False. False will result in the
+  model
+  training from scratch if run_training is set to True. Presently, the auto resume functionality is not implemented and
+  the user will have to enter the starting epoch manually(i.e. start from the ith epoch): Example use case is presented
+  below. Warning: To start from scratch and run the complete desired number of epochs, set starting_epoc to zero **(not
+  used in this implementation, leftover due to code reusage from Assignment2)**
+- **load_model** >> **Boolean**, to load previously saved model from the Models directory.
+- **run_test_set** >> **Boolean**, to run inference on the provided testset and generate performance metrics, saved to
+  the
+  Results directory
+- **generate_video_frames** >> **Boolean**,generates video frames
+
+- **generate_video** >> **Boolean**,creates a video from the frames saved
+
+Set desired hyperparameters:
+
+![hyper_parameters.PNG](Accumulated_Data%2Fhyper_parameters.PNG)
+
+- backbone >> Desired encoder backbone
+- model_name >> Name of the .py file running to standardize the names of the saved files and ease of later use
+- batch_size >> sets the batch size param for dataloader
+- learning_rate >> sets the starting learning rate for cosine annealing
+- pretrained >> Boolean, This option is not valid for Custom model(proposed model),who's no pretrained weights exist on
+  the ImageNet Dataset **(not used in this implementation, leftover due to code reusage from Assignment2)**
+- epochs >> Total Epochs to run, in case of resumed training, this is the ending epoch
+- classes >> Used where number of classes needs to be referenced
+- device_name >> torch.cuda.get_device_name(0) >> Name of the GPU used
+- device >> Training device used
+- starting_time>> logs the start time for duration calculation
+- class_names >> used for reference while generating outputs
+
+Set Dataset paths and augmentations:
+
+![Paths_and_aug.PNG](Accumulated_Data%2FPaths_and_aug.PNG)
+
+Select model if needed, [Documentation](https://smp.readthedocs.io/en/latest/) for models library and if loss, optimizer
+and/or schedular needs to be changed.
+
+![Model and backbone.PNG](Accumulated_Data%2FModel%20and%20backbone.PNG)
+
+Training_function:
+
+![Training_function.PNG](Accumulated_Data%2FTraining_function.PNG)
+
+### NOTE: Resume interrupted training was not implemented in this case due to smaller dataset size and faster training times compared to Assignment 2.
+
 <a name="Installingdependencies"></a>
 
 ### Installing dependencies:
+
 ```commandline
  pip install -r requirements.txt
 ```
+
 #### ForManualInstallation:
 
 ```commandline
+
 albumentations==1.3.0
 matplotlib==3.7.1
 numpy==1.24.1
@@ -138,56 +250,20 @@ segmentation_models_pytorch==0.3.2
 torch==2.0.1+cu117
 torchvision==0.15.2+cu117
 tqdm==4.65.0
+
 ```
-
-
 
 <a name="TrainingParameters"></a>
 
 ### Training Parameters:
 
-<a name="TrainingVisualizations"></a>
+- **Optimizer** >> Adam
+- **Schedular** >> Cosine Annealing(0.0001 to 0.00001 with 100 steps)
+- **Loss Function** >> Cross Entorpy Loss + Dice Loss
 
-### Training Visualizations:
+Rest of the settings are mentioned below:
 
-<a name="Results"></a>
-
-## Results:
-
-<a name="QuantitativeResults"></a>
-
-#### Quantitative Results:
-
-<a name="QualitativeResults"></a>
-
-#### Qualitative Results:
-
-<a name="DetailedAssignmentreport"></a>
-
-## Detailed Assignment report:
-
-**Available [here](https://drive.google.com/drive/folders/1KX51gnUIVgop-15Sze-z_UNINKxda7LG?usp=share_link)**
-<a name="Credits"></a>
-
-## Credits:
-
-This implementation is based on the *
-*[Segmentation Models Pytorch Library](https://github.com/qubvel/segmentation_models.pytorch/tree/master)**
-
-![U_net_PP_resnet101_video.gif](Results%2FVideos%2Fgif_files%2FU_net_PP_resnet101_video.gif)
-
-**Trained Models are
-availavle [here](https://drive.google.com/drive/folders/1h0f-khok7UQCqT1ZDvyH-5Bc9p08joz6?usp=share_link)**. Linked
-separately due to large file size.
-
-### Data Logging
-
-Data Logging was done using [Wandb](https://wandb.ai)
-
-Training Reports are
-available [here](https://drive.google.com/drive/folders/1gZZT-aQrLS7wA_vsW-74y9nHbjkkaPfj?usp=share_link)
-
-### Experimental Settings
+**Experimental Settings**
 
 | Experiment Settings |            |                  |                     |                   |            |        |                  |                     |                     |                |                |
 |---------------------|------------|------------------|---------------------|-------------------|------------|--------|------------------|---------------------|---------------------|----------------|----------------|
@@ -205,7 +281,25 @@ available [here](https://drive.google.com/drive/folders/1gZZT-aQrLS7wA_vsW-74y9n
 |                     | PANet      | Efficient Net B4 | 0.001               | 0.00001           | 8          | 100    | True             | 0.737               | 0.272               | 1,181.8        | 11.8           |
 |                     | PANet      | RESNEXT50        | 0.001               | 0.00001           | 8          | 100    | True             | 0.748               | 0.271               | 1,022.9        | 10.2           |
 
-# Experimental Results:
+<a name="TrainingVisualizations"></a>
+
+### Training Visualizations:
+
+**Training Performance for the Unet++ with the Efficient_net_b4 backbone**
+
+![U_net_PP_efficientnet-b4_Training_Metrics.png](Results%2FU_net_PP_efficientnet-b4_Training_Metrics.png)
+
+**Validation Performance for the Unet++ with the Efficient_net_b4 backbone**
+
+![U_net_PP_efficientnet-b4_Validation_Metrics.png](Results%2FU_net_PP_efficientnet-b4_Validation_Metrics.png)
+
+<a name="Results"></a>
+
+## Results:
+
+<a name="QuantitativeResults"></a>
+
+#### Quantitative Results:
 
 | Test Set    |            |                  |               |          |                     |           |            |       |        |           |                   |       |          |       |       |          |       |            |       |       |            |           |
 |-------------|------------|------------------|---------------|----------|---------------------|-----------|------------|-------|--------|-----------|-------------------|-------|----------|-------|-------|----------|-------|------------|-------|-------|------------|-----------|
@@ -223,3 +317,30 @@ available [here](https://drive.google.com/drive/folders/1gZZT-aQrLS7wA_vsW-74y9n
 |             | PANet      | RESNET101        | 0.7193        | 0.986    | 0.405               | 0.315     | 0.685      | 0.603 | 0.913  | 0.913     | 0.966             | 0.905 | 0.134    | 0.979 | 0.915 | 0.945    | 0.425 | 0.753      | 0.705 | 0.381 | 0.661      | 0.368     |
 |             | PANet      | Efficient Net B4 | 0.6834        | 0.986    | 0.371               | 0.312     | 0.688      | 0.608 | 0.915  | 0.915     | 0.966             | 0.907 | 0.151    | 0.981 | 0.920 | 0.948    | 0.443 | 0.770      | 0.687 | 0.428 | 0.668      | 0.331     |
 |             | PANet      | RESNEXT50        | 0.7157        | 0.985    | 0.398               | 0.318     | 0.682      | 0.596 | 0.912  | 0.912     | 0.967             | 0.908 | 0.093    | 0.979 | 0.915 | 0.945    | 0.498 | 0.734      | 0.661 | 0.477 | 0.614      | 0.268     |
+
+<a name="QualitativeResults"></a>
+
+#### Qualitative Results:
+
+**Few Mask prediction examples for the Unet++ with the Efficient_net_b4 backbone**
+
+![U_net_PP_efficientnet-b4_qualitative_results.jpg](Results%2FU_net_PP_efficientnet-b4_qualitative_results.jpg)
+<a name="DetailedAssignmentreport"></a>
+
+## Detailed Assignment report:
+
+**Available [here](https://drive.google.com/drive/folders/1KX51gnUIVgop-15Sze-z_UNINKxda7LG?usp=share_link)**
+<a name="Credits"></a>
+
+## Credits:
+
+This implementation is based on the *
+*[Segmentation Models Pytorch Library](https://github.com/qubvel/segmentation_models.pytorch/tree/master)**
+
+### Data Logging
+
+Data Logging was done using [Wandb](https://wandb.ai)
+
+Training Reports are
+available [here](https://drive.google.com/drive/folders/1gZZT-aQrLS7wA_vsW-74y9nHbjkkaPfj?usp=share_link)
+

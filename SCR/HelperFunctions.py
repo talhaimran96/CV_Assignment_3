@@ -13,12 +13,12 @@ import segmentation_models_pytorch as segmentation_models
 def mIoU(pred_mask, mask, smooth=1e-10, n_classes=12):
     """
     REUSED FROM LAB 4- semantic segmentation
-    computes the mean IOU for the model
-    :param pred_mask:
-    :param mask:
-    :param smooth:
-    :param n_classes:
-    :return:
+    computes the mean IOU for the samples
+    :param pred_mask: Predicted Mask
+    :param mask: Ground truth
+    :param smooth: prevents 0/0 cases
+    :param n_classes: # of classes in the dataset
+    :return: mean IOU
     """
     with torch.no_grad():
         pred_mask = functional.softmax(pred_mask, dim=1)
@@ -44,6 +44,19 @@ def mIoU(pred_mask, mask, smooth=1e-10, n_classes=12):
 
 def run_epoch(model, classification_loss_function, dice_loss_function, dataloader, optimizer, train=False, device="cpu",
               loss_weights=[1, 1], logger=None):
+    """
+    Runs one epoch on the model using provided dataloader and other params.
+    :param model: Torch model(segmentation in this case)
+    :param classification_loss_function: Any classification loss fuction that can handle torch tensors
+    :param dice_loss_function: Dice loss function
+    :param dataloader: torch Dataloader
+    :param optimizer: any torch optimizer
+    :param train: Ture, then runs backprop, else runs inference if False
+    :param device: "cpu" or "gpu", "cpu by default"
+    :param loss_weights: List of ratios to add classification and dice loss, default=[1, 1]
+    :param logger: Datalogger, I used wandb
+    :return: loss, accuracy, classification_loss, dice_loss, dice_score, iou, recall, precison, f1 for that epoch
+    """
     if train:
         model.train()
     else:
@@ -114,7 +127,16 @@ def run_epoch(model, classification_loss_function, dice_loss_function, dataloade
 
 
 def display_for_comparison(image, mask, pred_mask, score):
+    """
+    Displays examples according to the requirements of the assignment.
+    :param image: Image file, normalized
+    :param mask: Ground truth
+    :param pred_mask: Predicted mask
+    :param score: mIOU Score to print, Not implemented/used here
+    """
     fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(20, 10))
+
+    # Preform reverse normalization to restore color, using receprocal of mean and std of imagenet. reused from assignment 2
     reverse_norm = transformations.Compose([transformations.Normalize(mean=[0., 0., 0.],
                                                                       std=[1 / 0.229, 1 / 0.224,
                                                                            1 / 0.225]),
@@ -137,6 +159,16 @@ def display_for_comparison(image, mask, pred_mask, score):
 
 def predict_image_mask_miou(model, image, mask, mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225],
                             device='cpu'):
+    """
+    Generated mask and mIOU score for single image
+    :param model: Trained torch segmentation model
+    :param image: test image
+    :param mask: Ground truth
+    :param mean: Normalization mean, default imagenet
+    :param std: Normalization std, default imagenet
+    :param device: "cpu" or "gpu"
+    :return: predicted mask, mIOU score
+    """
     model.eval()
     t = transformations.Compose([transformations.ToTensor(), transformations.Normalize(mean, std)])
     # image = t(image.numpy())
@@ -156,6 +188,21 @@ def predict_image_mask_miou(model, image, mask, mean=[0.485, 0.456, 0.406], std=
 
 def plot_metrics(model_name, backbone, event, loss, accuracy, classification_loss, dice_loss, dice_score, iou, recall,
                  precision, f1):
+    """
+    Plots list of training params passed
+    :param model_name: Model name for super title
+    :param backbone: Backbone for super title
+    :param event: "train","test","validation" - for super title
+    :param loss: list of per epoch loss
+    :param accuracy: list of per epoch accuracy
+    :param classification_loss: list of per epoch classification loss
+    :param dice_loss: list of per epoch dice loss
+    :param dice_score: list of per epoch dice score
+    :param iou: list of per epoch iou score
+    :param recall: list of per epoch recall(segmentation model library)
+    :param precision: list of per epoch precision(segmentation model library)
+    :param f1: mean per class F1 score(not used/implemented here)
+    """
     plt.figure(figsize=(12, 8))
     plt.suptitle(model_name + " " + backbone + " " + event)
     plt.subplot(1, 3, 1)
