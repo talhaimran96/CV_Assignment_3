@@ -61,6 +61,9 @@ such that they are not separated by another object.
 
 ![Assignment_3_Illustrations1.png](Accumulated_Data%2FAssignment_3_Illustrations1.png)
 
+Encoding Techniques:
+![Assignment_3_Illustrations2.png](Accumulated_Data%2FAssignment_3_Illustrations2.png)
+
 <a name="Dataset"></a>
 
 ## Dataset and Augmentation:
