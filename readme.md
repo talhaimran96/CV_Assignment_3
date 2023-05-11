@@ -9,21 +9,23 @@ Semantic Segmentation
 1. [Abstract](#Abstract)
 2. [Introduction](#Introduction)
 3. [Dataset and Augmentation](#Dataset)
-    1. [Data Distribution](#Data Distribution)
+    1. [Data Distribution](#DataDistribution)
 4. [File Navigation](#Navigation)
     1. [Nomenclature](#Nomenclature)
-5. [Implementation details](#Implementation details)
-    1. [Usage instructions](#Usage instructions)
-    2. [Installing dependencies](#Installing dependencies)
-    3. [Training Parameters](#Training Parameters)
-    4. [Training Visualizations](#Training Visualizations)
+5. [Implementation details](#Implementationdetails)
+    1. [Usage instructions](#Usageinstructions)
+    2. [Installing dependencies](#Installingdependencies)
+    3. [Training Parameters](#TrainingParameters)
+    4. [Training Visualizations](#TrainingVisualizations)
 6. [Results](#Results)
-    1. [Quantitative Results](#Quantitative Results)
-    2. [Qualitative Results](#Qualitative Results)
-7. [Detailed Assignment report](#Detailed Assignment report)
+    1. [Quantitative Results](#QuantitativeResults)
+    2. [Qualitative Results](#QualitativeResults)
+7. [Detailed Assignment report](#DetailedAssignmentreport)
 8. [Credits](#Credits)
 
-## Abstract <a name="Abstract"></a>
+<a name="Abstract"></a>
+
+## Abstract
 
 Extracting semantics from images or high-dimensional unstructured data is of great significance for many applications
 such as autonomous driving, medical imaging, remote sensing, object detection, etc. The process of labeling each pixel
@@ -33,7 +35,8 @@ unstructured data, just as humans are able to perceive the world around them and
 Segmentation of images is one stepping stone towards developing machines that can understand and perceive the
 environment and world around them.
 
-## Introduction <a name="Introduction"></a>
+<a name="Introduction"/></a>
+## Introduction
 
 Semantic segmentation is the process of labeling each pixel with respect to its category/class. This has many
 applications, such as autonomous driving, remote sensing, medical imaging, etc. The labels are assigned in the form of a
@@ -52,38 +55,45 @@ such that they are not separated by another object.
 
 ![Assignment_3_Illustrations1.png](Accumulated_Data%2FAssignment_3_Illustrations1.png)
 
-## Dataset and Augmentation:<a name="Dataset"></a>
+<a name="Dataset"></a>
+
+## Dataset and Augmentation:
 
 The dataset is comparatively small, while simultaneously, the labeling seems to be quite coarse in nature. The training
 data was split into a training and validation set with the ratios 80-20, respectively. Due to the fewer number of data
 samples available, a number of augmentation techniques were used to improve training performance. Provided below is a
 list of the augmentations used and the rationale behind their use.
 
-- **Horizontal flip:** It is quite common to encounter reflections of the same object, and most objects that exist in nature
+- **Horizontal flip:** It is quite common to encounter reflections of the same object, and most objects that exist in
+  nature
   tend to have a very similar appearance compared to the original object.
 
-- **Vertical flip:** Although uncommon in nature, it is possible that upside-down objects may be present in an environment
+- **Vertical flip:** Although uncommon in nature, it is possible that upside-down objects may be present in an
+  environment
   around a sensing system.
 - **Random brightness:** It is very common to see random brightness variations in nature with regards to changing light
   levels
   during the day. It is also possible to encounter random brightness fluctuations due to photometric anomalies presented
   by reflections, cloud covers, street lights, etc.
 
-- **Gaussian blur:** It may be possible that the object is out of the plane of focus from the camera and may appear slightly
+- **Gaussian blur:** It may be possible that the object is out of the plane of focus from the camera and may appear
+  slightly
   blurred.
 
-- **Cutouts:** Occlusions are a quite frequent occurrence in nature and in everyday life where the object of interest may be
+- **Cutouts:** Occlusions are a quite frequent occurrence in nature and in everyday life where the object of interest
+  may be
   occluded by another object.
 
 - **Gaussian noise:** This type of noise may be introduced due to variations in the camera’s sensitivity such as ISO
   variations, etc.
 
-- **Resize image:** Images are resized to 256x256 since the used network requires the dimensions of the input image to be
+- **Resize image:** Images are resized to 256x256 since the used network requires the dimensions of the input image to
+  be
   multiples of 16, and this is the closest downsample possible
 
+<a name="DataDistribution"></a>
 
-
-#### Data Distribution: <a name="Data Distribution"></a>
+#### Data Distribution:
 
 | Dataset    | Samples |
 |------------|---------|
@@ -91,31 +101,75 @@ list of the augmentations used and the rationale behind their use.
 | Validation | 74      |
 | Test       | 101     |
 
-## File Navigation:<a name="Navigation"></a>
+<a name="Navigation"></a>
 
-### Nomenclature: <a name="Nomenclature"></a>
+## File Navigation:
 
-## Implementation details:<a name="Implementation details"></a>
+<a name="Nomenclature"></a>
 
-### Usage instructions:<a name="Usage instructions"></a>
+### Nomenclature:
 
-### Installing dependencies:<a name="Installing dependencies"></a>
+<a name="Implementationdetails"></a>
 
-### Training Parameters:<a name="Training Parameters"></a>
+## Implementation details:
 
-### Training Visualizations:<a name="Training Visualizations"></a>
+<a name="Usageinstructions"></a>
 
-## Results:<a name="Results"></a>
+### Usage instructions:
 
-#### Quantitative Results:<a name="Quantitative Results"></a>
+<a name="Installingdependencies"></a>
 
-#### Qualitative Results:<a name="Qualitative Results"></a>
+### Installing dependencies:
+```commandline
+ pip install -r requirements.txt
+```
+#### ForManualInstallation:
 
-## Detailed Assignment report: <a name="Detailed Assignment report"></a>
+```commandline
+albumentations==1.3.0
+matplotlib==3.7.1
+numpy==1.24.1
+opencv_python==4.7.0.72
+opencv_python_headless==4.7.0.72
+pandas==2.0.1
+Pillow==9.3.0
+Pillow==9.5.0
+segmentation_models_pytorch==0.3.2
+torch==2.0.1+cu117
+torchvision==0.15.2+cu117
+tqdm==4.65.0
+```
+
+
+
+<a name="TrainingParameters"></a>
+
+### Training Parameters:
+
+<a name="TrainingVisualizations"></a>
+
+### Training Visualizations:
+
+<a name="Results"></a>
+
+## Results:
+
+<a name="QuantitativeResults"></a>
+
+#### Quantitative Results:
+
+<a name="QualitativeResults"></a>
+
+#### Qualitative Results:
+
+<a name="DetailedAssignmentreport"></a>
+
+## Detailed Assignment report:
 
 **Available [here](https://drive.google.com/drive/folders/1KX51gnUIVgop-15Sze-z_UNINKxda7LG?usp=share_link)**
+<a name="Credits"></a>
 
-## Credits:<a name="Credits"></a>
+## Credits:
 
 This implementation is based on the *
 *[Segmentation Models Pytorch Library](https://github.com/qubvel/segmentation_models.pytorch/tree/master)**
