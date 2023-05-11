@@ -16,14 +16,14 @@ from torchvision import transforms as transformations
 import cv2
 
 # These params can be updated to allow for better control of the program(i.e. the control knobs of this code)
-run_training = True  # False to run inferences, otherwise it'll start train the model
+run_training = False  # False to run inferences, otherwise it'll start train the model
 resume_training = False  # If training needs to be resumed from some epoch
 load_model = True  # If you want to load a model previously trained
 run_test_set = True  # True to run test set post training
-generate_video_frames = False  # generates video frames
-generate_video = False
+generate_video_frames = True  # generates video frames
+generate_video = True
 
-backbone = 'resnext50_32x4d'  # 'efficientnet-b4'  # 'resnet101'  # 'efficientnet-b4'  # 'vgg16_bn'#'resnet18'
+backbone = 'resnet101'  # 'resnext50_32x4d'  # 'efficientnet-b4'  # 'resnet101'  # 'efficientnet-b4'  # 'vgg16_bn'#'resnet18'
 model_name = os.path.basename(__file__).split(".")[
     0]  # Name of the .py file running to standardize the names of the saved files and ease of later use
 batch_size = 8
@@ -361,14 +361,14 @@ if run_test_set:
                 plt.imshow(pred_mask, alpha=0.3, cmap='viridis')
                 plt.suptitle(model_name + " " + backbone + "_results")
                 plt.tight_layout()
-                plt.savefig(f"./Results/Video_frames/resnet18/{index}.jpg")
+                plt.savefig(f"./Results/Video_frames/Deeplabv3pp/{index}.jpg")
 
         if generate_video:
-            image_folder = './Results/Video_frames/resnet18'
-            video_name = f'./Results/Videos/{backbone}_video.avi'
+            image_folder = './Results/Video_frames/Deeplabv3pp'
+            video_name = f'./Results/Videos/{model_name}_{backbone}_video.avi'
             frames = os.listdir(image_folder)
             frames.sort(key=lambda f: int(re.sub('\D', '', f)))
-            print(frames)
+            # print(frames)
             images = [img for img in frames if img.endswith(".jpg")]
             frame = cv2.imread(os.path.join(image_folder, images[0]))
             height, width, layers = frame.shape

@@ -1,0 +1,3 @@
+,test_loss,test_accuracy,test_classification_loss,test_dice_loss,test_dice_score,test_iou,test_recall,test_precision,test_f1
+0,"tensor(0.6784, device='cuda:0')",tensor(0.9862),0.387169748544693,"tensor(0.2912, device='cuda:0')","tensor(0.7088, device='cuda:0')",0.6255782483758374,tensor(0.9175),tensor(0.9175),"tensor([0.9685, 0.9084, 0.1541, 0.9836, 0.9309, 0.9437, 0.4940, 0.7550, 0.7602,
+        0.4363, 0.7241, 0.3467])"

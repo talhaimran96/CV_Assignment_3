@@ -3,6 +3,7 @@ import torch
 from torch.utils.data import DataLoader
 import numpy as np
 import os
+import re
 import time
 from HelperFunctions import run_epoch, display_for_comparison, predict_image_mask_miou, plot_metrics
 import segmentation_models_pytorch as segmentation_models
@@ -22,10 +23,10 @@ run_test_set = True  # True to run test set post training
 generate_video_frames = False  # generates video frames
 generate_video = False
 
-backbone = 'efficientnet-b7'  # 'efficientnet-b7'#'mit_b5'  # 'resnet18'
+backbone = 'resnext50_32x4d'  # 'efficientnet-b4'  # 'resnet101'
 model_name = os.path.basename(__file__).split(".")[
     0]  # Name of the .py file running to standardize the names of the saved files and ease of later use
-batch_size = 4
+batch_size = 8
 learning_rate = 0.001
 pretrained = False  # This option is not valid for Custom model, no pretrained weights exist
 epochs = 100
@@ -47,11 +48,11 @@ mean = [0.485, 0.456, 0.406]
 std = [0.229, 0.224, 0.225]
 
 augmentations = Augmentations.Compose(
-    [Augmentations.HorizontalFlip(always_apply=False, p=0.5), Augmentations.VerticalFlip(always_apply=False, p=0.1),
-     Augmentations.RandomBrightness(always_apply=False, p=0.1),
-     Augmentations.GaussianBlur(always_apply=False, p=0.1),
-     Augmentations.Cutout(num_holes=2, max_h_size=5, max_w_size=5, always_apply=False, p=0.1),
-     Augmentations.GaussNoise(always_apply=False, p=0.1), Augmentations.Resize(256, 256)])
+    [Augmentations.HorizontalFlip(always_apply=False, p=0.5), Augmentations.VerticalFlip(always_apply=False, p=0.2),
+     Augmentations.RandomBrightness(always_apply=False, p=0.2),
+     Augmentations.GaussianBlur(always_apply=False, p=0.2),
+     Augmentations.Cutout(num_holes=5, max_h_size=5, max_w_size=5, always_apply=False, p=0.2),
+     Augmentations.GaussNoise(always_apply=False, p=0.2), Augmentations.Resize(256, 256)])
 
 test_set = DataSet(test_images_path, test_annotation_path, mean, std, transform=augmentations)
 train_set = DataSet(train_images_path, train_annotation_path, mean, std, transform=augmentations)
@@ -67,7 +68,8 @@ test_loader = DataLoader(test_set, batch_size=batch_size,
                          shuffle=True)
 
 model = segmentation_models.UnetPlusPlus(encoder_name=backbone, encoder_weights='imagenet', in_channels=3, classes=12,
-                                         activation=None, encoder_depth=5, decoder_channels=[256, 128, 64, 32, 16])
+                                         activation=None, encoder_depth=5, decoder_channels=[256, 128, 64, 32, 16],
+                                         decoder_attention_type="scse")
 
 classification_loss_function = torch.nn.CrossEntropyLoss()
 dice_loss_function = DiceLoss(mode="multiclass")
@@ -359,17 +361,19 @@ if run_test_set:
                 plt.imshow(pred_mask, alpha=0.3, cmap='viridis')
                 plt.suptitle(model_name + " " + backbone + "_results")
                 plt.tight_layout()
-                plt.savefig(f"./Results/Video_frames/resnet18/{backbone}_{index}.jpg")
+                plt.savefig(f"./Results/Video_frames/Unetpp/{index}.jpg")
 
             if generate_video:
-                image_folder = './Results/Video_frames/resnet18'
-                video_name = f'./Results/Videos/{backbone}_video.avi'
-
-                images = [img for img in os.listdir(image_folder) if img.endswith(".jpg")]
+                image_folder = './Results/Video_frames/Unetpp'
+                video_name = f'./Results/Videos/{model_name}_{backbone}_video.avi'
+                frames = os.listdir(image_folder)
+                frames.sort(key=lambda f: int(re.sub('\D', '', f)))
+                # print(frames)
+                images = [img for img in frames if img.endswith(".jpg")]
                 frame = cv2.imread(os.path.join(image_folder, images[0]))
                 height, width, layers = frame.shape
 
-                video = cv2.VideoWriter(video_name, 0, 1, (width, height))
+                video = cv2.VideoWriter(video_name, cv2.VideoWriter_fourcc(*'MJPG'), 5, (width, height))
 
                 for image in images:
                     video.write(cv2.imread(os.path.join(image_folder, image)))

@@ -360,14 +360,14 @@ if run_test_set:
                 plt.imshow(pred_mask, alpha=0.3, cmap='viridis')
                 plt.suptitle(model_name + " " + backbone + "_results")
                 plt.tight_layout()
-                plt.savefig(f"./Results/Video_frames/resnet18/{index}.jpg")
+                plt.savefig(f"./Results/Video_frames/Unet/{index}.jpg")
 
         if generate_video:
-            image_folder = './Results/Video_frames/resnet18'
-            video_name = f'./Results/Videos/{backbone}_video.avi'
+            image_folder = './Results/Video_frames/Unet'
+            video_name = f'./Results/Videos/{model_name}_{backbone}_video.avi'
             frames = os.listdir(image_folder)
             frames.sort(key=lambda f: int(re.sub('\D', '', f)))
-            print(frames)
+            #print(frames)
             images = [img for img in frames if img.endswith(".jpg")]
             frame = cv2.imread(os.path.join(image_folder, images[0]))
             height, width, layers = frame.shape

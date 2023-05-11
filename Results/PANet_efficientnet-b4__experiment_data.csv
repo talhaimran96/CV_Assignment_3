@@ -1,0 +1,2 @@
+,Model/Backbone,Start Learning_rate,End Learning_rate,Batch_size,Training_set_size,Epochs,Test_set_size,Validation_set_size,Tranfer_learning,max_validation_dice,Classification_loss,Execution_time,Per Epoch Time
+0,PANet,0.001,1e-05,8,293,100,101,74,False,"tensor(0.7371, device='cuda:0')",0.27181862890720365,1181.7519688606262,11.817519688606263
