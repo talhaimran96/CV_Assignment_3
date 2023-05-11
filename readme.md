@@ -17,6 +17,7 @@ Semantic Segmentation
     2. [Installing dependencies](#Installingdependencies)
     3. [Training Parameters](#TrainingParameters)
     4. [Training Visualizations](#TrainingVisualizations)
+    5. [Data Logging](#logging)
 6. [Results](#Results)
     1. [Quantitative Results](#QuantitativeResults)
     2. [Qualitative Results](#QualitativeResults)
@@ -293,6 +294,15 @@ Rest of the settings are mentioned below:
 
 ![U_net_PP_efficientnet-b4_Validation_Metrics.png](Results%2FU_net_PP_efficientnet-b4_Validation_Metrics.png)
 
+<a name="logging"></a>
+
+### Data Logging
+
+Data Logging was done using [Wandb](https://wandb.ai)
+
+Training Reports are
+available [here](https://drive.google.com/drive/folders/1gZZT-aQrLS7wA_vsW-74y9nHbjkkaPfj?usp=share_link)
+
 <a name="Results"></a>
 
 ## Results:
@@ -334,13 +344,7 @@ Rest of the settings are mentioned below:
 
 ## Credits:
 
-This implementation is based on the *
-*[Segmentation Models Pytorch Library](https://github.com/qubvel/segmentation_models.pytorch/tree/master)**
+This implementation is based on the
+**[Segmentation Models Pytorch Library](https://github.com/qubvel/segmentation_models.pytorch/tree/master)**
 
-### Data Logging
-
-Data Logging was done using [Wandb](https://wandb.ai)
-
-Training Reports are
-available [here](https://drive.google.com/drive/folders/1gZZT-aQrLS7wA_vsW-74y9nHbjkkaPfj?usp=share_link)
 
